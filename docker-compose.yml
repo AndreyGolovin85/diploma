@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  todolist_db:
+    image: postgres:12.0-alpine
+    volumes:
+      - todolist_db_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=todolist
+      - POSTGRES_PASSWORD=todolist
+      - POSTGRES_DB=todolist
+      - POSTGRES_HOST=localhost
+      - POSTGRES_PORT=5432
+    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
+volumes:
+  todolist_db_data:
