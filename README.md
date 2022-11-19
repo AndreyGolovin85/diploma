@@ -6,7 +6,6 @@
 
 стек (python3.9, Django, Postgres)
 
-Для создания базы Postgres в Docker требуется воспользоваться командой docker-compose up
-
+Для создания базы Postgres в Docker требуется воспользоваться командой docker-compose up. 
 Если сервер Postres запущен локально, то запустить add_postgres_db.py см. инструкцию внутри. Так же потребуется изменить
 настройки в файле .env.
