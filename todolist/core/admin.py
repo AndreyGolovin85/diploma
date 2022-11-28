@@ -10,4 +10,4 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ("email", "first_name", "last_name", "username")
     list_filter = ("is_staff", "is_active", "is_superuser")
     exclude = ("password",)
-    readonly_fields = ("Last login", "Date joined")
+    readonly_fields = ("last_login", "date_joined")

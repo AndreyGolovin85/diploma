@@ -15,13 +15,12 @@ class UserRoles:
 
 
 class User(AbstractUser):
-    role = models.CharField(choices=UserRoles.choices, default="member", max_length=12)
     email = models.EmailField(unique=True)
     age = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
         verbose_name = "Пользователь"
-        verbose_name_plural = "Пользователя"
+        verbose_name_plural = "Пользователи"
 
     def __str__(self):
         return f"Пользователь: {self.first_name} {self.last_name}"
