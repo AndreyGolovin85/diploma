@@ -18,7 +18,6 @@ services:
       DEBUG: $DEDUG
       SECRET_KEY: $SECRET_KEY
       ALLOWED_HOSTS: $ALLOWED_HOSTS
-      DATABASE_URL: $DATABASE_URL
   migrations:
     image: andreygolovin85/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     depends_on:
