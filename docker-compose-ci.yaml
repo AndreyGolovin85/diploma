@@ -8,7 +8,7 @@ services:
     depends_on:
       - api
   api:
-    image: andreyGolovin85/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: andreygolovin85/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     depends_on:
       postgres:
         condition: service_healthy
@@ -20,7 +20,7 @@ services:
       ALLOWED_HOSTS: $ALLOWED_HOSTS
       DATABASE_URL: $DATABASE_URL
   migrations:
-    image: andreyGolovin85/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: andreygolovin85/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     depends_on:
       postgres:
         condition: service_healthy
