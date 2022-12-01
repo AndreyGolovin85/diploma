@@ -28,7 +28,6 @@ services:
       DEBUG: $DEDUG
       SECRET_KEY: $SECRET_KEY
       ALLOWED_HOSTS: $ALLOWED_HOSTS
-      DATABASE_URL: $DATABASE_URL
   postgres:
     image: postgres:latest
     environment:
