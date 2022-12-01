@@ -24,7 +24,7 @@ services:
       postgres:
         condition: service_healthy
     command: >
-      sh -c "python3 manage.py migrate"
+      sh -c "python3 ./todolist/manage.py migrate"
     environment:
       DEBUG: $DEDUG
       SECRET_KEY: $SECRET_KEY
