@@ -13,7 +13,7 @@ jobs:
       - name: docker login
         run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: docker push
-        run: docker push andreygolovin85/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+        run: docker push andreygolovin5/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push
