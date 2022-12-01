@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   front:
@@ -8,7 +8,7 @@ services:
     depends_on:
       - api
   api:
-    image: andreygolovin85/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: andreygolovin5/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     depends_on:
       postgres:
         condition: service_healthy
@@ -19,7 +19,7 @@ services:
       SECRET_KEY: $SECRET_KEY
       ALLOWED_HOSTS: $ALLOWED_HOSTS
   migrations:
-    image: andreygolovin85/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: andreygolovin5/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     depends_on:
       postgres:
         condition: service_healthy
