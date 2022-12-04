@@ -28,7 +28,7 @@ services:
   migrations:
     image: andreygolovin5/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     environment:
-      DEBUG: $DEDUG
+      DEBUG: $DEBUG
       POSTGRES_HOST: $POSTGRES_HOST
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
