@@ -38,7 +38,7 @@ services:
       db:
         condition: service_healthy
     command: >
-      sudo su sh -c "python3 manage.py migrate"
+      su sh -c "python3 manage.py migrate"
 
   db:
     image: postgres:latest
