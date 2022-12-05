@@ -1,8 +1,7 @@
-from django.contrib import admin
 from django.urls import path
 
-from todolist.core.views import RegistrationView
+from . import views
 
 urlpatterns = [
-    path('core/signup', RegistrationView.as_view(), name="signup"),
+    path('core/signup', views.RegistrationView.as_view(), name="signup"),
 ]
