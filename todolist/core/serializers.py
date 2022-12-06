@@ -55,3 +55,10 @@ class LoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = "__all__"
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.User
+        fields = ("id", "username", "first_name", "last_name", "email")
