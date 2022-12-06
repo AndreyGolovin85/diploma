@@ -4,3 +4,4 @@ psycopg2-binary==2.9.5
 Pillow==9.3.0
 serializers==0.2.4
 djangorestframework==3.14.0
+django-cors-headers==3.13.0

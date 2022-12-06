@@ -15,7 +15,7 @@ class UserRoles:
 
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True)
+    #email = models.EmailField(unique=True)
     age = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
