@@ -33,3 +33,11 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
     def delete(self, request, *args, **kwargs):
         logout(request)
         return Response({})
+
+
+class PasswordUpdateView(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.PasswordUpdateSerializer
+
+    def get_object(self):
+        return self.request.user
