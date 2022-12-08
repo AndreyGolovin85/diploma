@@ -1,5 +1,4 @@
 from django.db import models
-<<<<<<< Updated upstream
 from django.utils import timezone
 
 from core.models import User
@@ -21,7 +20,3 @@ class GoalCategory(models.Model):
             self.created = timezone.now()  # проставляем дату создания
         self.updated = timezone.now()  # проставляем дату обновления
         return super().save(*args, **kwargs)
-=======
-
-# Create your models here.
->>>>>>> Stashed changes
