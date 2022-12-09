@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import GoalCategory
-from ..core.serializers import RetrieveUserSerializer
+from core.serializers import RetrieveUserSerializer
 
 
 class GoalCreateSerializer(serializers.ModelSerializer):
