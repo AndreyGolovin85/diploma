@@ -3,6 +3,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.validators import UniqueValidator
 
 from . import models
 
@@ -36,6 +37,25 @@ class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = "__all__"
+
+
+class RetrieveUserSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    username = serializers.CharField(
+        validators=[
+            UniqueValidator(queryset=models.User.objects.all())
+        ]
+    )
+
+    class Meta:
+        model = models.User
+        fields = (
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+            'email'
+        )
 
 
 class LoginSerializer(serializers.ModelSerializer):

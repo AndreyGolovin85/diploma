@@ -1,9 +1,6 @@
-from rest_framework import serializers, permissions, filters
+from rest_framework import serializers
 
-from rest_framework.generics import ListAPIView
-from rest_framework.pagination import LimitOffsetPagination
-
-from goals.models import GoalCategory
+from goals.models import GoalCategory, RetrieveUserSerializer
 
 
 class GoalCreateSerializer(serializers.ModelSerializer):
@@ -16,7 +13,7 @@ class GoalCreateSerializer(serializers.ModelSerializer):
 
 
 class GoalCategorySerializer(serializers.ModelSerializer):
-    #user = UserSerializer(read_only=True)
+    user = RetrieveUserSerializer(read_only=True)
 
     class Meta:
         model = GoalCategory
