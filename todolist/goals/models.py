@@ -57,4 +57,29 @@ class Goal(models.Model):
         return super().save(*args, **kwargs)
 
 
+class GoalComment(models.Model):
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
 
+    text = models.TextField(verbose_name="Текст")
+    goal = models.ForeignKey(
+        Goal,
+        verbose_name="Цель",
+        on_delete=models.PROTECT,
+        related_name="comments",
+    )
+    user = models.ForeignKey(
+        "core.User",
+        verbose_name="Пользователь",
+        on_delete=models.PROTECT,
+        related_name="comments",
+    )
+    created = models.DateTimeField(verbose_name="Дата создания")
+    updated = models.DateTimeField(verbose_name="Дата последнего обновления")
+
+    def save(self, *args, **kwargs):
+        if not self.id:  # Когда объект только создается, у него еще нет id
+            self.created = timezone.now()  # проставляем дату создания
+        self.updated = timezone.now()  # проставляем дату обновления
+        return super().save(*args, **kwargs)
