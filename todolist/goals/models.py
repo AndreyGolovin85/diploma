@@ -10,7 +10,7 @@ class GoalCategory(models.Model):
         verbose_name_plural = "Категории"
 
     title = models.CharField(verbose_name="Название", max_length=255)
-    user = models.ForeignKey(User, verbose_name="Автор", on_delete=models.PROTECT)
+    user = models.ForeignKey("core.User", verbose_name="Автор", on_delete=models.PROTECT)
     is_deleted = models.BooleanField(verbose_name="Удалена", default=False)
     created = models.DateTimeField(verbose_name="Дата создания")
     updated = models.DateTimeField(verbose_name="Дата последнего обновления")
@@ -44,8 +44,8 @@ class Goal(models.Model):
         verbose_name="Приоритет", choices=Priority.choices, default=Priority.medium
     )
     due_date = models.DateField(verbose_name="Дата выполнения")
-    user = models.ForeignKey(User, verbose_name="Автор", on_delete=models.PROTECT)
-    category = models.ForeignKey("core.User", verbose_name="Категория", related_name="goals",
+    user = models.ForeignKey("core.User", verbose_name="Автор", on_delete=models.PROTECT)
+    category = models.ForeignKey(GoalCategory, verbose_name="Категория", related_name="goals",
                                  on_delete=models.CASCADE)
     created = models.DateTimeField(verbose_name="Дата создания")
     updated = models.DateTimeField(verbose_name="Дата последнего обновления")
