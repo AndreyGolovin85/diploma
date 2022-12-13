@@ -116,3 +116,4 @@ class GoalCommentView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return GoalComment.objects.filter(user=self.request.user)
 
+
