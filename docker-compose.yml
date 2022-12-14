@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   frontend:
-    image: sermalenk/skypro-front:lesson-35
+    image: sermalenk/skypro-front:lesson-37
     restart: always
     depends_on:
       - api
@@ -32,7 +32,7 @@ services:
     command: >
       sh -c "python manage.py migrate"
   db:
-    image: postgres:latest
+    image: postgres:15.1-alpine
     environment:
       POSGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
