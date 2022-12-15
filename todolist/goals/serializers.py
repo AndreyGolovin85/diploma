@@ -52,15 +52,14 @@ class GoalCreateSerializer(serializers.ModelSerializer):
         if value.user != self.context["request"].user:
             raise serializers.ValidationError("not owner of category")
 
-        if self.instance.category.board_id != value.board_id:
-            raise serializers.ValidationError("Transfer between projects not allowed")
+        # if self.instance.category.board_id != value.board_id:
+        #     raise serializers.ValidationError("Transfer between projects not allowed")
 
         return value
 
 
 class GoalSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    #category = serializers.PrimaryKeyRelatedField(queryset=GoalCategory.objects.filter(is_deleted=False))
 
     class Meta:
         model = Goal
@@ -89,7 +88,7 @@ class GoalCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = GoalComment
         fields = "__all__"
-        read_only_fields = ("id", "created", "updated", "user")
+        read_only_fields = ("id", "created", "updated", "user", "goal")
 
 
 class BoardCreateSerializer(serializers.ModelSerializer):
