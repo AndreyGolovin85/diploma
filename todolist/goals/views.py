@@ -29,7 +29,7 @@ class GoalCategoryListView(ListAPIView):
     search_fields = ["title"]
 
     def get_queryset(self):
-        return GoalCategory.objects.prefetch_related("participants").filter(
+        return GoalCategory.objects.filter(
             board__participants__user_id=self.request.user.id,
             is_deleted=False
         )
@@ -41,7 +41,7 @@ class GoalCategoryView(RetrieveUpdateDestroyAPIView):
     permission_classes = [GoalCategoryPermissions, permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return GoalCategory.objects.prefetch_related("participants").filter(
+        return GoalCategory.objects.filter(
             board__participants__user_id=self.request.user.id,
             is_deleted=False
         )
@@ -94,11 +94,15 @@ class GoalCommentCreateView(CreateAPIView):
     permission_classes = [CommentsPermission]
     serializer_class = GoalCommentCreateSerializer
 
+    def perform_create(self, serializer: GoalCommentCreateSerializer):
+        serializer.save(goal_id=self.request.data['goal'])
+
 
 class GoalCommentListView(generics.ListAPIView):
     model = GoalComment
     permission_classes = [CommentsPermission]
     serializer_class = GoalCommentSerializer
+    pagination_class = LimitOffsetPagination
     filter_backends = [
         DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ["goal"]
@@ -106,7 +110,7 @@ class GoalCommentListView(generics.ListAPIView):
 
     def get_queryset(self):
         return GoalComment.objects.filter(
-            category__board__participants__user_id=self.request.user.id
+            goal__category__board__participants__user_id=self.request.user.id
         )
 
 
@@ -117,7 +121,7 @@ class GoalCommentView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return GoalComment.objects.filter(
-            category__board__participants__user_id=self.request.user.id
+            goal__category__board__participants__user_id=self.request.user.id
         )
 
 
@@ -130,6 +134,7 @@ class BoardListView(generics.ListAPIView):
     model = Board
     permission_classes = [BoardPermissions]
     serializer_class = BoardListSerializer
+    pagination_class = LimitOffsetPagination
     ordering = ["title"]
 
     def get_queryset(self):
