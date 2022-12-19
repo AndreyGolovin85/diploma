@@ -1,3 +1,4 @@
+from django.core.validators import MinLengthValidator
 from django.db import models
 from django.utils import timezone
 
@@ -16,9 +17,11 @@ class BaseModelBot(models.Model):
 
 
 class Bot(BaseModelBot):
-    chat_id = models.CharField(verbose_name="Id чата", max_length=20)
-    user_ud = models.CharField(verbose_name="Ud пользователя", max_length=20)
-    user_id = models.CharField(null=True)
+    chat_id = models.BigIntegerField()
+    user_id = models.BigIntegerField(unique=True)
+    user_ud = models.CharField(max_length=40, validators=[MinLengthValidator(5)])
+    user = models.ForeignKey("core.User", null=True, on_delete=models.CASCADE)
+    verification_code = models.CharField(max_length=15, unique=True)
 
     class Meta:
         verbose_name = "Пользователь"
