@@ -1,28 +1,25 @@
-from django.core.validators import MinLengthValidator
+import random
+import string
+
 from django.db import models
-from django.utils import timezone
+
+from core.models import User
 
 
-class BaseModelBot(models.Model):
-    created = models.DateTimeField(verbose_name="Дата создания")
+# Create your models here.
+class TgUser(models.Model):
+    tg_chat_id = models.BigIntegerField(verbose_name='TG CHAT_ID')
+    tg_user_id = models.BigIntegerField(unique=True, verbose_name='TG USER_ID')
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT, default=None)
+    verification_code = models.CharField(max_length=10, unique=True)
+    username = models.CharField(max_length=255, verbose_name='TG USERNAME', null=True, blank=True, default=None)
 
-    class Meta:
-        abstract = True
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.created = timezone.now()
-        self.updated = timezone.now()
-        return super().save(*args, **kwargs)
-
-
-class Bot(BaseModelBot):
-    chat_id = models.BigIntegerField()
-    user_id = models.BigIntegerField(unique=True)
-    user_ud = models.CharField(max_length=40, validators=[MinLengthValidator(5)])
-    user = models.ForeignKey("core.User", null=True, on_delete=models.CASCADE)
-    verification_code = models.CharField(max_length=15, unique=True)
+    def set_verification_code(self) -> None:
+        length = 10  # Длина кода подтверждения
+        digits = string.digits
+        v_code = ''.join(random.sample(digits, length))
+        self.verification_code = v_code
 
     class Meta:
-        verbose_name = "Пользователь"
-        verbose_name_plural = "Пользователи"
+        verbose_name = 'TG User'
+        verbose_name_plural = 'TG Users'
