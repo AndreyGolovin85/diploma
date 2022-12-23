@@ -37,6 +37,8 @@ SECRET_KEY = env.str('SECRET_KEY', 'secret')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default='True')
 
+BOT_TOKEN = env.str('BOT_TOKEN')
+
 ALLOWED_HOSTS = ["*"]
 
 
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
 
     'core',
     'goals',
+    'bot',
 
     'rest_framework',
     'corsheaders',
