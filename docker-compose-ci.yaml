@@ -44,7 +44,7 @@ services:
       DATABASE_URL: $DATABASE_URL
       BOT_TOKEN: $BOT_TOKEN
     command: >
-      bash -c 'python3 manage.py runbot'
+      sh -c "python3 manage.py runbot"
   migrations:
     image: andreygolovin5/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     environment:
