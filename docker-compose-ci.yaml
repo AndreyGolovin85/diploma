@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   frontend:
-    image: sermalenk/skypro-front:lesson-37
+    image: sermalenk/skypro-front:lesson-38
     restart: always
     depends_on:
       - api
@@ -20,6 +20,7 @@ services:
       SECRET_KEY: $SECRET_KEY
       SOCIAL_AUTH_VK_OAUTH2_KEY: $SOCIAL_AUTH_VK_OAUTH2_KEY
       SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
+      BOT_TOKEN: $BOT_TOKEN
     depends_on:
       db:
         condition: service_healthy
@@ -27,6 +28,23 @@ services:
         condition: service_completed_successfully
     ports:
       - "8000:8000"
+  bot:
+    image: andreygolovin5/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    depends_on:
+      db:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+    environment:
+      DEBUG: $DEBUG
+      SECRET_KEY: $SECRET_KEY
+      ALLOWED_HOSTS: $ALLOWED_HOSTS
+      SOCIAL_AUTH_VK_OAUTH2_KEY: $SOCIAL_AUTH_VK_OAUTH2_KEY
+      SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
+      DATABASE_URL: $DATABASE_URL
+      BOT_TOKEN: $BOT_TOKEN
+    command: >
+      bash -c 'python3 manage.py runbot'
   migrations:
     image: andreygolovin5/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     environment:
@@ -38,6 +56,7 @@ services:
       SECRET_KEY: $SECRET_KEY
       SOCIAL_AUTH_VK_OAUTH2_KEY: $SOCIAL_AUTH_VK_OAUTH2_KEY
       SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
+      BOT_TOKEN: $BOT_TOKEN
     depends_on:
       db:
         condition: service_healthy
