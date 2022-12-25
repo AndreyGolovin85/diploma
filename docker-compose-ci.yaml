@@ -30,6 +30,7 @@ services:
       - "8000:8000"
   bot:
     image: andreygolovin5/diploma:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    restart: always
     depends_on:
       db:
         condition: service_healthy
@@ -41,7 +42,6 @@ services:
       ALLOWED_HOSTS: $ALLOWED_HOSTS
       SOCIAL_AUTH_VK_OAUTH2_KEY: $SOCIAL_AUTH_VK_OAUTH2_KEY
       SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
-      DATABASE_URL: $DATABASE_URL
       BOT_TOKEN: $BOT_TOKEN
     command: >
       sh -c "python3 manage.py runbot"
