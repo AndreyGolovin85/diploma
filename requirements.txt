@@ -10,3 +10,5 @@ django-filter==22.1
 requests==2.28.1
 marshmallow==3.19.0
 marshmallow_dataclass==8.5.10
+telebot==0.0.4
+psycopg2==2.9.5
