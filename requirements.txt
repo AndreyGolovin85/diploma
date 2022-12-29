@@ -15,7 +15,6 @@ inflection==0.5.1
 iniconfig==1.1.1
 jsonschema==4.17.1
 marshmallow==3.19.0
-marshmallow-dataclass==8.5.10
 mypy==0.991
 mypy-extensions==0.4.3
 oauthlib==3.2.2
@@ -43,3 +42,7 @@ typing_extensions==4.4.0
 tzdata==2022.6
 uritemplate==4.1.1
 urllib3==1.26.13
+marshmallow_dataclass==8.5.10
+telebot==0.0.4
+psycopg2==2.9.5
+
